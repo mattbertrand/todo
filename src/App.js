@@ -11,22 +11,23 @@ function App() {
   const [filteredTodos, setFilterTodos] = useState([]);
 
   useEffect(() => {
+    const filterHandler = () => {
+      switch(status){
+        case 'completed':
+          setFilterTodos(todos.filter(todo => todo.completed === true))
+          break
+        case 'uncompleted':
+          setFilterTodos(todos.filter(todo => todo.completed === false))
+          break
+        default:
+          setFilterTodos(todos)
+          break
+      }
+    }
     filterHandler()
   }, [todos, status])
 
-  const filterHandler = () => {
-    switch(status){
-      case 'completed':
-        setFilterTodos(todos.filter(todo => todo.completed === true))
-        break
-      case 'uncompleted':
-        setFilterTodos(todos.filter(todo => todo.completed === false))
-        break
-      default:
-        setFilterTodos(todos)
-        break
-    }
-  }
+  
   return (
     <div className="App">
       <header>
